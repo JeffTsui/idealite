@@ -1,0 +1,20 @@
+*Use Best_In_Place for in-place editing to replace mercury
+https://github.com/bernat/best_in_place
+http://railscasts.com/episodes/302-in-place-editing?view=asciicast
+
+*Considering scale up notification by using Stream
+http://getstream.io/docs/#frameworks
+
+*Realtime messaging by Mailboxer and Faye
+https://github.com/mailboxer/mailboxer
+http://faye.jcoglan.com/security.html
+
+*Survey by using Surveyor
+https://github.com/NUBIC/surveyor
+
+*Sync for realtime updates
+https://github.com/chrismccord/sync
+
+*Show unread counts
+https://github.com/ledermann/unread
+

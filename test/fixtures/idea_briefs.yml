@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  problem: MyString
+  target: MyString
+  how: MyString
+  result: MyString
+  risk: MyString
+  user_id: 1
+
+two:
+  title: MyString
+  problem: MyString
+  target: MyString
+  how: MyString
+  result: MyString
+  risk: MyString
+  user_id: 1

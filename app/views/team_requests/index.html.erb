@@ -1,0 +1,71 @@
+<h4>Pending Requests</h4>
+  <% if @pending_requests.count>0 %>
+  <ul class="list-group">
+    <% @pending_requests.each do |team_request| %>
+      <li class="list-group-item">
+        <div class="row" id=<%=team_request.id%>>
+          <div class="col-md-8">
+            <div>
+              <%=link_to team_request.team.name, profile_path(team_request.team.profile.id)%>
+            </div>
+            <div>
+              <span>
+                <img src=<%=team_request.requester.image_url%> class="navbar-img" alt="profile image" width="25",  height="25">                          
+              </span>
+              <span>
+                <%=link_to team_request.requester.name, profile_path(team_request.requester.profile.id)%>
+                invited you.
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4">
+              <div class="row" id=<%= "button_"+team_request.id.to_s%>>
+                <div class="pull-right">
+                  <div class="col-xs-5">
+                    <%= button_to "Accept", team_request_path(team_request.id, :action_type=>"accept"), method: :put, remote: :true, class:"btn btn-primary"%>
+                  </div>
+                  <div class="col-xs-4">
+                    <%= button_to "Ignore", team_request_path(team_request.id, :action_type=>"ignore"), method: :put, remote: :true, class:"btn"%>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <% else %>
+    <div class="panel">
+      <div class="panel-body">
+        <p class="text-muted">You have no pending team requests.</p>
+      </div>
+    </div>
+  <% end %>
+
+<h4>My Requests</h4>
+  <% if @my_requests.count>0 %>
+    <ul class="list-group">
+      <% @my_requests.each do |team_request| %>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-8">
+              <div>
+                <%=link_to team_request.team.name, profile_path(team_request.team.profile.id)%>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="pull-right">
+                <button type="button" class="btn">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="panel">
+      <div class="panel-body">
+        <p class="text-muted">You have no requests.</p>
+      </div>
+    </div>
+<% end %>

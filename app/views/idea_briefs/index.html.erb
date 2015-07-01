@@ -1,0 +1,37 @@
+<h1>Listing idea_briefs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Problem</th>
+      <th>Target</th>
+      <th>How</th>
+      <th>Result</th>
+      <th>Risk</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @idea_briefs.each do |idea_brief| %>
+      <tr>
+        <td><%= idea_brief.title %></td>
+        <td><%=raw idea_brief.problem %></td>
+        <td><%=raw idea_brief.target %></td>
+        <td><%=raw idea_brief.how %></td>
+        <td><%=raw idea_brief.result %></td>
+        <td><%=raw idea_brief.risk %></td>
+        <td><%= idea_brief.user_id %></td>
+        <td><%= link_to 'Show', idea_brief %></td>
+        <td><%= link_to 'Edit', edit_idea_brief_path(idea_brief) %></td>
+        <td><%= link_to 'Destroy', idea_brief, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Idea brief', new_idea_brief_path %>

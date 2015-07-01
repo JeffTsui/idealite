@@ -1,0 +1,74 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-hearder">
+            <a class="navbar-brand" href="#">Ideas Lite</a>
+        </div>
+        <form class="navbar-form navbar-left" role="search" style="margin-left: 10%; margin-right: 5%">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+                <button type="submit" class="btn btn-default">Search</button>                
+            </div>
+        </form>
+        <span><%=link_to 'New Idea',  new_idea_brief_path, class: "btn btn-info btn-large navbar-btn"%></span>
+
+        <div class="row navbar-right">
+            <span class="navbar-text">
+                <span class="topbar-icon-group">
+                  <%=link_to(team_requests_path, class:"topbar-fa fa fa-group fa-2x") do%>
+                      <% if team_notification_count != 0 %>
+                          <span class="badge badge-notify">
+                              <%= team_notification_count%>
+                          </span>
+                      <%end%>
+                  <%end%>
+                </span>
+                <span class="topbar-icon-group">
+                  <%=link_to(teams_path, class:"topbar-fa fa fa-link fa-2x") do%>
+                          <span class="badge badge-notify">
+                            5
+                          </span>
+                  <%end%>
+                </span>
+                <span class="topbar-icon-group">
+                  <%=link_to(teams_path, class:"topbar-fa fa fa-bullhorn fa-2x") do%>
+                          <span class="badge badge-notify">
+                            5
+                          </span>
+                  <%end%>
+                </span>
+            </span>
+            <span class="navbar-nav">
+                <img src=<%=current_user.image_url%> class="navbar-img img-thumbnail" alt="profile image" width="50",  height="50">                          
+            </span>
+            <span class="dropdown navbar-nav">
+                <a class="navbar-text dropdown-toggle topbar-fa" data-toggle="dropdown" href="#">
+                    <%=current_user.name%>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <span class="fa fa-list fa-fw"></span>
+                        <span> 
+                            <%= link_to 'My Ideas Memo', idea_briefs_path %>
+                        </span>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <span class="fa fa-group fa-fw"></span>
+                        <span> 
+                            <%= link_to 'My Teams', teams_path%>
+                        </span>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <span class="fa fa-sign-out fa-fw"></span>
+                        <span> 
+                            <%= link_to 'Log Out', destroy_user_session_path, :method=>:delete %>
+                        </span>
+                    </li>
+                </ul>
+            </span>
+        </div>
+    </div>
+</nav>
+

@@ -1,0 +1,79 @@
+<p id="notice">
+  <%=notice %>
+</p>
+
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p class="pull-left">
+      <%if @idea_brief.idea%>
+        <span class="glyphicon glyphicon-globe">  Published</span>
+      <%else%>
+        <span><%= link_to '', ideas_path(:idea_brief_id=>@idea_brief.id), :method=>:post, 
+        class: "btn btn-default glyphicon glyphicon-globe" %></span>
+      <%end%>
+      </p>
+      <p class="text-right">
+        <span><%= link_to '', "/editor/"+request.path, class: "btn btn-default glyphicon glyphicon-pencil" %></span>      
+        <span><%= link_to '', @idea_brief, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default glyphicon glyphicon-trash" %></span>
+      </p>
+    </div>
+  <div id="title" class="panel-body" data-mercury="simple">
+    <h3>
+      <%if @idea_brief.idea%>
+        <%=link_to @idea_brief.title, idea_path(@idea_brief.idea) %>
+      <%else%>
+        <%=@idea_brief.title%>
+      <%end%>
+    </h3>
+  </div>
+  </div>
+</div>
+
+<div class="panel-group">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Problem Statement
+  </div>
+  <div id="problem" class="panel-body" data-mercury="full">
+    <%=raw @idea_brief.problem %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Target Audience
+  </div>
+  <div id="target" class="panel-body" data-mercury="simple">
+    <%=raw @idea_brief.target %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Idea Detail
+  </div>
+  <div id="how" class="panel-body" data-mercury="full">
+    <%=raw @idea_brief.how %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Benefits
+  </div>
+  <div id="result" class="panel-body" data-mercury="full">
+    <%=raw @idea_brief.result %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    What Can Go Wrong?
+  </div>
+  <div id="risk" class="panel-body" data-mercury="full">
+    <%=raw @idea_brief.risk %>
+  </div>
+</div>
+</div>
+

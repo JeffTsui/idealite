@@ -1,0 +1,47 @@
+<div class="panel-body">
+    <h4><%=link_to @idea.idea_brief.title, idea_path(@idea)%></h4>
+    <p class="small text-muted"><%=@idea.idea_brief.short_desc%></p>
+    <p class="text-muted">
+        <i class="fa fa-chevron-right small"></i>
+        <%=link_to "see details", "#", class:"small"%>
+    </p>
+    <div>
+        <i class="fa fa-group text-primary"></i>
+        <%=link_to "Teams:", "#", class:"text-primary", 
+            :data=>{:toggle=>"modal", :target=>"#idea_teams_modal"}%>
+         <%if @idea_teams%>
+             <%@idea_teams.each do |team|%>
+                 <%=link_to team.name, team_path(team.id)%>
+             <%end%>
+         <%end%>
+    </div>
+    
+    <div id="idea_teams_modal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Choose teams</h4>
+            <p class="text-muted small">from teams you manage</p>
+          </div>
+            <%= form_tag(action:"update_teams")  do%>
+              <div class="modal-body">
+                <%@teams_admined.each_slice(3) do |teams|%>
+                    <div class="row">
+                        <%teams.each do |team|%>
+                            <div class="col-md-4">
+                                <%= check_box_tag 'team_ids[]', team.id, is_idea_team(team.id)%>
+                                <%=team.name%>
+                            </div>
+                        <%end%>
+                    </div>
+                <%end%>
+              </div>
+              <div class="modal-footer">
+                  <%= submit_tag "OK", class:"btn btn-primary"%>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              </div>
+          <%end%>
+        </div>
+      </div>
+    </div>    
+</div>

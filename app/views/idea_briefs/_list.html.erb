@@ -1,0 +1,11 @@
+<a href=<%= idea_brief_path(idea_brief.id)%> class="list-group-item">
+    <p class="list-group-item-text small">
+        <%= localize(idea_brief.updated_at, :format=>:short)%>
+    </p>
+    <h4 class="list-group-item-heading">
+        <%= idea_brief.title%>            
+    </h4>
+    <p class="list-group-item-text">
+        <%=truncate(strip_tags(idea_brief.how), length: 100)%>
+    </p>
+</a>

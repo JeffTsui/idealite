@@ -1,0 +1,41 @@
+<%content_for :content do%>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+          <%=render "shared/topbar"%>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="list-group">
+                <div class="list-group-item disabled">
+                    Teams You Manage
+                </div>
+                <%= render partial: "shared/team_list", collection: teams_admined, as: :team %>
+            </div>
+            <div class="list-group">
+                <div class="list-group-item disabled">
+                    Teams You Are In
+                </div>
+                <%= render partial: "shared/team_list", collection: teams_in, as: :team %>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="container-fluid">
+                <div class="row">
+                    <span><%=link_to 'Create Team',  new_team_path, class: "btn btn-success pull-right"%></span>
+                </div>
+                <div class="row-spacer"></div>
+                <div class="row">
+                    <%= yield%>                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%end%>
+
+<%=render template: "layouts/application"%>
+
+
+
