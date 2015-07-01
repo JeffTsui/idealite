@@ -10,6 +10,35 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require font-awesome
+ *= require jquery-ui
  *= require_tree .
  *= require_self
  */
+
+.dropdown-menu {
+    padding-left: 15px;
+    padding-right: 10px;
+}
+
+.row-spacer {
+    padding: 10px;
+}
+
+.badge-notify {
+    background:red;
+    position:relative;
+    top: -20px;
+    left: -15px;
+}
+
+.topbar-icon-group{
+    width:58px;
+    display:inline-block;
+}
+
+.topbar-fa:hover, .topbar-fa:active {
+    color:silver;
+    background:none;
+    text-decoration:none;
+}

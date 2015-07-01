@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 # Use sqlite3 as the database for Active Record
@@ -43,3 +42,39 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# Bootstrap
+gem 'bootstrap-sass', '~>3.3.4'
+
+#Devise (authentication)
+gem 'devise'
+
+#Omniauth Oauth 
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+
+#Rails Admin
+gem 'rails_admin'
+
+#Rich text edit
+#gem 'mercury-rails', :git => 'git://github.com/jejacks0n/mercury.git'
+
+#Colorize string
+gem 'colorize'
+
+#Font Awesome Icons
+gem "font-awesome-rails"
+
+#Friendship
+gem 'amistad'
+
+#Auto Complete
+gem 'rails4-autocomplete'
+
+#jquery migrate
+gem 'jquery-migrate-rails'
+
+#Public Activity
+gem 'public_activity'
+
+#Socialization
+gem 'socialization'

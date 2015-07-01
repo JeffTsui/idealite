@@ -21,3 +21,8 @@ module Workspace
     # config.i18n.default_locale = :de
   end
 end
+
+Rails.application.config.assets.precompile += %w{jquery-1.7.js}
+
+#Colorize
+require 'colorize'

@@ -1,4 +1,29 @@
 Rails.application.routes.draw do
+  resources :idea_teams
+
+  resources :profiles
+
+  get 'activities/index'
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
+  resources :idea_briefs
+
+  root to: 'idea_briefs#index'
+  devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
+
+  resources :ideas do
+    post :update_teams, :on => :member
+  end
+
+  resources :teams do
+    get :autocomplete_user_name, :on => :collection
+  end
+  
+  resources :team_requests
+  
+  resources :activities
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
