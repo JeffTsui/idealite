@@ -18,3 +18,23 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+//Dependent dropdowns
+// GET json from /{dropdown id}/ with parameter "observed"
+$(document).ready(function(){
+    console.log("document ready...")
+    $('select[data-option-dependent=true]').each(function(){
+        var observer_id = $(this).attr('id')
+        var observed_id = $('#'+$(this).data('option-observed'))
+        var url = $(this).attr('id')
+
+        observed_id.on('change', function(){
+            $.ajax({url: url, 
+            type: 'GET',
+            dataType: 'script',
+            data: {
+                observer_id: observer_id,
+                observed_id: observed_id.val()
+            }})
+        })
+    })
+});

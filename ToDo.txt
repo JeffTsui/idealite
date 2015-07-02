@@ -18,3 +18,7 @@ https://github.com/chrismccord/sync
 *Show unread counts
 https://github.com/ledermann/unread
 
+*Tags
+acts-as-taggable-on jQUery Tag-it
+https://github.com/xoxco/jQuery-Tags-Input#instructions
+https://github.com/timschlechter/bootstrap-tagsinput

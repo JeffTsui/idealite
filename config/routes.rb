@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :post_actors
+
+  get 'post_as/index'
+
+  resources :posts
+
   resources :idea_teams
 
   resources :profiles
@@ -14,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :ideas do
     post :update_teams, :on => :member
+    get :post_actor_id, :on => :collection, :format => :json
   end
 
   resources :teams do

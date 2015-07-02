@@ -29,7 +29,7 @@
                     <div class="row">
                         <%teams.each do |team|%>
                             <div class="col-md-4">
-                                <%= check_box_tag 'team_ids[]', team.id, is_idea_team(team.id)%>
+                                <%= check_box_tag 'team_ids[]', team.id, is_idea_team?(team.id)%>
                                 <%=team.name%>
                             </div>
                         <%end%>

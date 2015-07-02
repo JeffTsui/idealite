@@ -2,6 +2,7 @@ class Team < ActiveRecord::Base
     has_many :user_teams
     has_many :users, :through => :user_teams
     has_one :profile, :as => :profile
+    has_many :post_actor, :as => :post_actor
     has_many :idea_teams
     has_many :teams, :through => :idea_teams
     

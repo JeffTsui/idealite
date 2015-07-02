@@ -1,6 +1,10 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_idea, only: [:show, :edit, :update, :destroy, :update_teams]
+  before_action :set_idea, only: [:show, :edit, :update, :destroy, 
+    :update_teams, :post_actor_id, :save_session_idea]
+  before_action :save_session_idea, only: [:show]
+  
+  respond_to :html, :json
 
   # GET /ideas
   # GET /ideas.json
@@ -13,6 +17,9 @@ class IdeasController < ApplicationController
   def show
     @teams_admined = Team.teams_admined(current_user.id)
     @idea_teams = @idea.teams
+    @post = Post.new
+    @post_actor_cat = ["me","team"]
+    logger.debug session[:idea_id].inspect.light_blue
   end
 
   # GET /ideas/new
@@ -36,6 +43,21 @@ class IdeasController < ApplicationController
       end
     end
     redirect_to @idea
+  end
+
+  # GET dropdown list (ajax call)
+  def post_actor_id
+    logger.debug "get dropdown".light_yellow
+    @observer_id = params[:observer_id]
+    @post_actor_cat = params[:observed_id]
+    @options=nil
+    @teams=@idea.my_idea_teams(current_user.id)
+    if @post_actor_cat == "team"
+      @options = @idea.my_idea_teams(current_user.id)
+    end
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /ideas
@@ -80,9 +102,20 @@ class IdeasController < ApplicationController
   end
 
   private
+    
+    #save current idea to session
+    def save_session_idea
+      if @idea.is_my_idea?(current_user.id)
+        logger.debug "save session idea".light_blue
+        session[:idea_id] = @idea.id
+      end
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_idea
-      @idea = Idea.find(params[:id])
+      #get idea_id from params or session
+      @idea_id = params[:id] ? params[:id] : session[:idea_id]
+      @idea = Idea.find(@idea_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

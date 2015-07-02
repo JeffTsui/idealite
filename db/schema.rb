@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701042941) do
+ActiveRecord::Schema.define(version: 20150702045651) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20150701042941) do
   add_index "idea_teams", ["team_id"], name: "index_idea_teams_on_team_id"
 
   create_table "ideas", force: true do |t|
-    t.integer  "created_by"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "privacy_flag"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20150701042941) do
   end
 
   add_index "ideas", ["idea_brief_id"], name: "index_ideas_on_idea_brief_id"
+  add_index "ideas", ["user_id"], name: "index_ideas_on_user_id"
 
   create_table "likes", force: true do |t|
     t.string   "liker_type"
@@ -123,6 +124,29 @@ ActiveRecord::Schema.define(version: 20150701042941) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "post_actors", force: true do |t|
+    t.integer  "post_id"
+    t.string   "post_actor_type"
+    t.string   "post_actor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "post_actors", ["post_actor_id"], name: "index_post_actors_on_post_actor_id"
+  add_index "post_actors", ["post_actor_type"], name: "index_post_actors_on_post_actor_type"
+  add_index "post_actors", ["post_id"], name: "index_post_actors_on_post_id"
+
+  create_table "posts", force: true do |t|
+    t.integer  "idea_id"
+    t.integer  "user_id"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["idea_id"], name: "index_posts_on_idea_id"
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "profiles", force: true do |t|
     t.integer  "profile_id"

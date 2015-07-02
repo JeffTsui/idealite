@@ -1,0 +1,14 @@
+<div class="panel-body">
+    <%=bootstrap_form_for(@post) do |f|%>
+        <%= f.text_area :text, hide_label:true, placeholder:"Write a post about this idea..."%>
+        <%= f.hidden_field :user_id, value:current_user.id%>
+        <%= f.hidden_field :idea_id, value:@idea.id%>
+        <span>
+            <span class="text-muted small">post as</span>
+            <%= select_tag :post_actor_cat, options_for_select(@post_actor_cat)%>
+            <%= select_tag :post_actor_id, nil, 
+                "data-option-dependent"=>true, "data-option-observed"=>:post_actor_cat, :class => 'grey-out' %>
+        </span>
+        <%= f.submit "Post", class:"pull-right btn btn-primary"%>
+    <%end%>
+</div>

@@ -78,3 +78,6 @@ gem 'public_activity'
 
 #Socialization
 gem 'socialization'
+
+#Bootstrap Form
+gem 'bootstrap_form'

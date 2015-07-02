@@ -1,0 +1,7 @@
+console.log("post_actor_id.js - change dropdown")
+<% if @options %>
+    $('#<%=@observer_id%>').empty().append("<%= j(render(partial: "option", collection: @options, as: :option)) %>").removeClass("grey-out").prop("disabled", false)
+<% else %>
+    console.log("no option")
+    $('#<%=@observer_id%>').empty().addClass("grey-out").prop("disabled", true)
+<% end %>

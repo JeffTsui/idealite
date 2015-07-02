@@ -1,0 +1,29 @@
+<h1>Listing post_actors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Post</th>
+      <th>Post actor type</th>
+      <th>Post actor</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @post_actors.each do |post_actor| %>
+      <tr>
+        <td><%= post_actor.post_id %></td>
+        <td><%= post_actor.post_actor_type %></td>
+        <td><%= post_actor.post_actor_id %></td>
+        <td><%= link_to 'Show', post_actor %></td>
+        <td><%= link_to 'Edit', edit_post_actor_path(post_actor) %></td>
+        <td><%= link_to 'Destroy', post_actor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post actor', new_post_actor_path %>

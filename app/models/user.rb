@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   has_many :user_teams
   has_many :teams, through: :user_teams
   has_one :profile, :as => :profile
+  has_many :post_actors, :as => :post_actor
+  has_many :posts
+  has_many :ideas
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
