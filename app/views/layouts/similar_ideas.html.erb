@@ -1,0 +1,22 @@
+<%content_for :header do%>
+<%end%>
+
+<%content_for :content do%>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+          <%=render "shared/topbar"%>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
+            <%= yield%>
+        </div>
+    </div>
+</div>
+<%end%>
+
+<%=render template: "layouts/application"%>
+
+
+

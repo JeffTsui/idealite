@@ -81,3 +81,27 @@ gem 'socialization'
 
 #Bootstrap Form
 gem 'bootstrap_form'
+
+#Comments
+gem 'acts_as_commentable'
+
+#TinyMCE
+gem 'tinymce-rails'
+
+#jQuery Turbolinks
+gem 'jquery-turbolinks'
+
+#upload to Amazon S3
+gem 'carrierwave_direct'
+
+#Mini Magick for image processing
+gem 'mini_magick'
+
+#File upload
+gem 'jasny-bootstrap-rails'
+
+#Attribute Default
+gem 'attribute-defaults'
+
+#Log Buddy
+gem 'log_buddy'

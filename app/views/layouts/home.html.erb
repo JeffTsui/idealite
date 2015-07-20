@@ -1,0 +1,25 @@
+<%content_for :content do%>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+          <%=render "shared/topbar"%>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <%=render "home_left_pane"%>
+        </div>
+        <div class="col-sm-6">
+            <%= yield%>
+        </div>
+        <div class="col-sm-3">
+            <%=render "home_right_pane"%>
+        </div>
+    </div>
+</div>
+<%end%>
+
+<%=render template: "layouts/application"%>
+
+
+

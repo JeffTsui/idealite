@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <%=image_tag @idea_brief.avatar_url, width:"150"%>
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-7">
+      <h3>
+        <%=@idea_brief.title%>
+      </h3>
+      <p class="">
+        <%=@idea_brief.short_desc%>
+      </p>
+    </div>
+  </div>
+  <div class="row" style="padding-top:2em">
+    <span>
+      <span>
+        <%=link_to "Edit Content", edit_idea_path(@idea), class:"btn btn-success"%>
+      </span>
+      <span class="">
+        <%=link_to "Change Picture", avatar_idea_path(@idea), class:"btn btn-success"%>
+      </span>
+    </span>
+    <span id="idea_privacy_dropdown" class="pull-right">
+        <%=render "idea_privacy_dropdown"%>
+    </span>
+  </div>
+</div>
+<hr>
+
+<div class="container-fluid">
+  <div>
+    <h4>Who this is for?</h4>
+    <%=raw @idea_brief.target %>
+  </div>
+  
+  <div>
+    <div>
+      <h4>How does this work?</h4>
+      <%=raw @idea_brief.how %>
+    </div>
+    <div>
+      <h4>What can go wrong?</h4>
+      <%=raw @idea_brief.risk %>
+    </div>
+  </div>
+</div>

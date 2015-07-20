@@ -1,0 +1,10 @@
+<div class="container-fluid">
+    <%=bootstrap_form_for(@post) do |f|%>
+        <%= f.text_area :text, hide_label:true, placeholder:"Leave comments..."%>
+        <%= f.hidden_field :user_id, value:current_user.id%>
+        <%= f.hidden_field :idea_id, value:@idea.id%>
+        <span class="btn pull-right">
+            <%= f.submit "Post", class:"btn btn-primary"%>
+        </span>
+    <%end%>
+</div>

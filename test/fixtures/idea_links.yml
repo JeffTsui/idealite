@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  idea_source_id: 1
+  idea_target_id: 1
+  user_id: 1
+
+two:
+  idea_source_id: 1
+  idea_target_id: 1
+  user_id: 1

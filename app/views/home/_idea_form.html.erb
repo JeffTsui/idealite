@@ -1,0 +1,11 @@
+<div>
+    <%=bootstrap_form_tag(url: claim_idea_ideas_path) do |f|%>
+        <div class="input-group">
+            <%= f.text_field :text, hide_label:true, placeholder:"Claim a new idea!"%>
+            <span class="input-group-btn">
+                <%= f.submit "Claim", class:"btn btn-succes"%>
+            </span>
+        </div>
+    <%end%>
+</div>
+

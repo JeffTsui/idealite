@@ -9,8 +9,9 @@ http://getstream.io/docs/#frameworks
 https://github.com/mailboxer/mailboxer
 http://faye.jcoglan.com/security.html
 
-*Survey by using Surveyor
+*Survey
 https://github.com/NUBIC/surveyor
+https://github.com/runtimerevolution/survey
 
 *Sync for realtime updates
 https://github.com/chrismccord/sync
@@ -22,3 +23,12 @@ https://github.com/ledermann/unread
 acts-as-taggable-on jQUery Tag-it
 https://github.com/xoxco/jQuery-Tags-Input#instructions
 https://github.com/timschlechter/bootstrap-tagsinput
+
+*Idea Details Versioning
+https://github.com/airblade/paper_trail
+
+*Upload images to S3
+https://github.com/dwilkie/carrierwave_direct
+
+*Better ENV variables management
+https://github.com/bkeepers/dotenv

@@ -1,0 +1,29 @@
+<div class="panel-body">
+    <%=bootstrap_form_for(@post) do |f|%>
+        <%= f.text_area :text, hide_label:true, placeholder:"Write a post about this idea..."%>
+        <%= f.hidden_field :user_id, value:current_user.id%>
+        <%= f.hidden_field :idea_id, value:@idea.id%>
+        <%= hidden_field_tag :post_actor_cat, "User", id: "post_actor_cat"%>
+        <%= hidden_field_tag :post_actor_id, current_user.id, id:"post_actor_id"%>
+        <span>
+        </span>
+        <span class="pull-right">
+            <span class="dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle" 
+                    data-toggle="dropdown">
+                    <i class="fa fa-pencil"></i>
+                    <span id="post_actor_button_text"> As Me</span>
+                </button>
+                <ul id="post_actor_dropdown" class="dropdown-menu">
+                    <li><a href="#" cat="User" value=<%=current_user.id%>>
+                        <i class="fa fa-user"></i><span> Me</span></a>
+                    </li>
+                    <li class="divider">Team</li>
+                    <%=render partial: "idea_team_dropdown", collection: @my_idea_teams, as: :my_idea_team%>
+                </ul>
+            </span>
+            <button type="button" class="btn btn-default"><i class="fa fa-bullhorn"></i> Public</button>
+            <%= f.submit "Post", class:"btn btn-primary"%>
+        </span>
+    <%end%>
+</div>

@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+                <img src=<%=post.post_actor.post_actor.image_url%> class="img" alt="profile image" width="30",  height="30">                          
+                <%=link_to post.post_actor.post_actor.name, actor_path(post)%>
+            </div>
+            <div class="text-muted small">
+                <%=localize(post.created_at, format: :short)%>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+                <% if post.post_actor.post_actor_type == "Team"%>
+                <div>
+                    <img src=<%=post.user.image_url%> class="img" alt="profile image" width="30",  height="30">                          
+                    <%=link_to post.user.name, "#"%>
+                </div>
+                <div class="text-muted small">
+                    Posted as team
+                </div>
+                <%end%>
+            </div>
+        </div>
+    </div>
+    <div>
+        <%=post.text%>
+    </div>
+    <div>
+        <%=render "idea_post_comment"%>
+    </div>
+</div>

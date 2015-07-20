@@ -1,0 +1,14 @@
+<h4>"<%=@idea_title%>" is going to be created</h4>
+<hr>
+<div class="alert alert-success">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  We've found some similar ideas you may want to take a look
+</div>
+
+<%=render partial: "similar_idea", collection: @similar_ideas, as: :similar_idea%>
+
+<hr>
+<div class="pull-right">
+  <%=link_to "Create New", new_idea_path(title: @idea_title), class:"btn btn-success"%>
+  <%=link_to "Cancel", :back, class:"btn btn-default"%>
+</div>

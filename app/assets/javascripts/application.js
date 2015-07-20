@@ -11,17 +11,19 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui
 //= require autocomplete-rails
+//= require tinymce-jquery
+//= require jasny-bootstrap.min
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
 
-//Dependent dropdowns
+//Dependent dropdowns (not used anymore)
 // GET json from /{dropdown id}/ with parameter "observed"
 $(document).ready(function(){
-    console.log("document ready...")
     $('select[data-option-dependent=true]').each(function(){
         var observer_id = $(this).attr('id')
         var observed_id = $('#'+$(this).data('option-observed'))

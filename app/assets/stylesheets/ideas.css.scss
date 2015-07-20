@@ -1,3 +1,41 @@
 // Place all the styles related to the Ideas controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.wall-title {
+    padding-left: 1em;
+}
+
+.wall-content {
+    border-left :1px solid #ddd;
+    border-right :1px solid #ddd;
+    border-bottom :1px solid #ddd;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.wall-tabs {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: -1px;
+}
+
+.idea-title-fa-liked {
+    color:steelblue;
+}
+
+.idea-title-fa-notliked {
+    color:gray;
+}
+
+.idea-title-fa:hover, .idea-title-fa:active, .idea-title-fa:focus {
+    outline: none;
+    color:lightskyblue;
+    background:none;
+    text-decoration:none;
+}
+
+.idea-title-fa-subtitle {
+    font-size:xx-small;
+    font-weight: bold;
+    text-align: center;
+}

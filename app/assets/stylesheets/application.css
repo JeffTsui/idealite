@@ -13,11 +13,37 @@
  *= require font-awesome
  *= require jquery-ui
  *= require rails_bootstrap_forms
+ *= require jasny-bootstrap.min
  *= require_tree .
  *= require_self
  */
 
-.dropdown-menu {
+:focus {
+    outline: 0;
+}
+
+a {
+    outline: 0;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+    background: red;
+}
+
+* Equal height columns of Bootstrap grid 
+* not working
+.row-equal {  
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.dropdown-menu-padding {
     padding-left: 15px;
     padding-right: 10px;
 }
@@ -46,4 +72,13 @@
 
 .grey-out {
     background:silver;
+}
+
+.vertical-bottom {
+    vertical-align:bottom;
+}
+
+/* fa icon for items, such as dropdown */
+.item-fa {
+    margin-right: 0.5em;
 }

@@ -1,8 +1,8 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_idea, only: [:show, :edit, :update, :destroy, 
-    :update_teams, :post_actor_id, :save_session_idea]
-  before_action :save_session_idea, only: [:show]
+    :update_teams, :post_actor_id, :save_session_idea, :like, :detail, :avatar, :aws_update_avatar, :privacy, :link]
+  before_action :init, only: [:show, :detail, :edit, :avatar, :aws_update_avatar, :link]
   
   respond_to :html, :json
 
@@ -15,20 +15,47 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    @teams_admined = Team.teams_admined(current_user.id)
-    @idea_teams = @idea.teams
     @post = Post.new
     @post_actor_cat = ["me","team"]
-    logger.debug session[:idea_id].inspect.light_blue
+    @watched_ideas = Idea.watched_ideas(current_user)
+    logger.debug "watched_ideas: #{@watched_ideas.map {|i| i.id}}".light_yellow
+  end
+  
+  def detail
+    logger.debug "showing idea detail page".light_blue
+  end
+  
+  def avatar
+    logger.debug params.inspect.light_blue
+    redirect_url = request.protocol + request.host + aws_update_avatar_idea_path
+    @uploader = @idea_brief.avatar
+    @uploader.success_action_redirect = redirect_url
+    logger.debug "saving avatar to S3 and redirect_to #{redirect_url}".light_yellow
+  end
+  
+  def aws_update_avatar
+    @idea_brief.update_attribute(:key, params[:key])
+    @idea_brief.update_attribute(:image_url, params[:key])
+    logger.debug @idea_brief.avatar.inspect.light_yellow
+    render "detail"
   end
 
+  #Search for similar ideas of the new claimed idea
+  def claim_idea
+    @idea_title = params[:text]
+    @similar_ideas = Idea.all
+    render layout: "similar_ideas"
+  end
+  
   # GET /ideas/new
   def new
-    @idea = Idea.new
+    @idea = Idea.claim_idea(current_user.id, params[:title])
+    redirect_to edit_idea_path(@idea)
   end
 
   # GET /ideas/1/edit
   def edit
+
   end
   
   #Update Teams
@@ -45,7 +72,7 @@ class IdeasController < ApplicationController
     redirect_to @idea
   end
 
-  # GET dropdown list (ajax call)
+  # GET dropdown list (ajax call) (not used anymore)
   def post_actor_id
     logger.debug "get dropdown".light_yellow
     @observer_id = params[:observer_id]
@@ -59,7 +86,46 @@ class IdeasController < ApplicationController
       format.js
     end
   end
+  
+  # Like Idea - AJAX call
+  def like
+    if params[:type] == "like"
+      if current_user.likes?(@idea)
+        current_user.unlike!(@idea)
+      else
+        current_user.like!(@idea)
+      end
+    elsif params[:type] == "follow"
+      if current_user.follows?(@idea)
+        current_user.unfollow!(@idea)
+      else
+        current_user.follow!(@idea)
+      end
+    end
+    logger.debug @idea.likers(User).inspect.light_yellow
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  #Update idea privacy - AJAX call  
+  def privacy
+    @idea.privacy_flag = params[:value]
+    @idea.save
+    respond_to do |format|
+      format.js
+    end
+  end
 
+  #Create/Update idea link
+  def link
+    @link_idea = Idea.find(params[:idea_linked_id])
+    IdeaLink.save_pair(@idea.id, params[:idea_linked_id], params[:value], current_user.id)
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   # POST /ideas
   # POST /ideas.json
   def create
@@ -103,10 +169,15 @@ class IdeasController < ApplicationController
 
   private
     
+    #Initialize for idea page
     #save current idea to session
-    def save_session_idea
+    def init
+      @teams_admined = Team.teams_admined(current_user.id)
+      @idea_teams = @idea.teams
+      @my_idea_teams =  @idea.my_idea_teams(current_user.id)
+      @idea_brief = @idea.idea_brief
       if @idea.is_my_idea?(current_user.id)
-        logger.debug "save session idea".light_blue
+        logger.debug "saving current idea #{@idea.id} to session".light_blue
         session[:idea_id] = @idea.id
       end
     end

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :post_actors, :as => :post_actor
   has_many :posts
   has_many :ideas
+  acts_as_follower
+  acts_as_liker
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

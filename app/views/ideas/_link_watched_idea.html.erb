@@ -1,0 +1,25 @@
+<div class="container-fluid" style="margin:0.5em">
+    <div class="row">
+        <div class="col-md-2">
+          <%=image_tag idea.idea_brief.avatar_url, width:"60"%>
+        </div>
+        <div class="col-md-6">
+          <div class="row-fluid">
+            <h5>
+              <%=link_to idea.idea_brief.title, idea_path(idea)%>
+            </h5>
+            </span>
+            <div class="row">
+              <div class="col-md-10">
+                <%=render partial: "shared/idea_social_counts", locals: {idea: idea}%>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+            <%=render partial: "link_dropdown", locals: {link_idea: idea}%>
+        </div>
+    </div>
+</div>
+
+<hr>

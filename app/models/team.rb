@@ -4,7 +4,7 @@ class Team < ActiveRecord::Base
     has_one :profile, :as => :profile
     has_many :post_actor, :as => :post_actor
     has_many :idea_teams
-    has_many :teams, :through => :idea_teams
+    has_many :ideas, :through => :idea_teams
     
     def self.teams_admined(user_id)
       Team.joins(:user_teams).where(:user_teams => {user_id: user_id, role_id: 0})

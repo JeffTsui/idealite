@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row" style="margin-left:-1.5em; margin-right:-1.5em">
+            <div class="col-md-3">
+                <span class="pull-left">
+                    <%=image_tag idea.idea_brief.avatar_url, width:"60"%>
+                </span>
+            </div>
+            <div class="col-md-9">
+                <h6 style="font-weight:bold; padding-left:0.5em">
+                    <%=link_to truncate(idea.idea_brief.title, length: 70), idea_path(idea)%>
+                </h6>
+            </div>
+        </div>
+        <p style="margin-top:0.5em">
+            <%=truncate(idea.idea_brief.short_desc, length: 90)%>
+        </p>
+        <p>
+            <%=render partial: "shared/idea_social_counts", locals: {idea: idea}%>
+        </p>
+    </div>
+</div>

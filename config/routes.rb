@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  
+  resources :idea_links
+
+  resources :homes do
+  end
+  
   resources :post_actors
 
   get 'post_as/index'
@@ -15,12 +21,21 @@ Rails.application.routes.draw do
 
   resources :idea_briefs
 
-  root to: 'idea_briefs#index'
+  root to: 'home#index'
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
+  
+  resources :users
 
   resources :ideas do
     post :update_teams, :on => :member
     get :post_actor_id, :on => :collection, :format => :json
+    get :like, :on => :member
+    get :detail, :on => :member
+    get :avatar, :on => :member
+    get :aws_update_avatar, :on => :member
+    post :claim_idea, on: :collection
+    put :privacy, on: :member
+    put :link, on: :member
   end
 
   resources :teams do

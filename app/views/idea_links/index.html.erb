@@ -1,0 +1,29 @@
+<h1>Listing idea_links</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Idea source</th>
+      <th>Idea target</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @idea_links.each do |idea_link| %>
+      <tr>
+        <td><%= idea_link.idea_source_id %></td>
+        <td><%= idea_link.idea_target_id %></td>
+        <td><%= idea_link.user_id %></td>
+        <td><%= link_to 'Show', idea_link %></td>
+        <td><%= link_to 'Edit', edit_idea_link_path(idea_link) %></td>
+        <td><%= link_to 'Destroy', idea_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Idea link', new_idea_link_path %>

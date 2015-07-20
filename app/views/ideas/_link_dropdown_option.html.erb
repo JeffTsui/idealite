@@ -1,0 +1,8 @@
+<li>
+  <%=link_to(link_idea_path(@idea, value:option[:value], idea_linked_id: link_idea.id), remote: true, method: :put) do%>
+    <span id=""> 
+      <i class="fa fa-link item-fa"></i>
+      <%=option[:label]%>
+    </span>
+  <%end%>
+</li>

@@ -22,8 +22,10 @@ class PostsController < ApplicationController
 
   def create
     @idea = Idea.find(params[:post][:idea_id])
-#    @post = Post.new(post_params)
-#    @post.save
+    @post = Post.new(post_params)
+    @post.save
+    @post_actor = PostActor.create(post_id: @post.id, post_actor_type: params[:post_actor_cat], 
+      post_actor_id: params[:post_actor_id])
     redirect_to @idea
   end
 

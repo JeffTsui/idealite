@@ -1,7 +1,55 @@
-<div class="panel panel-default">
-  <%=render "idea_post"%>
+<!--Post Forms -->
+<ul class="nav nav-tabs wall-tabs">
+  <li class="active">
+    <a data-toggle="tab" href="#post">
+      Post
+    </a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#poll">
+      Poll
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content wall-content">
+  <div id="post" class="tab-pane fade in active">
+      <%=render "idea_post_form"%>
+  </div>
+  <div id="poll" class="tab-pane fade">
+      <%=render "idea_survey_form"%>
+  </div>
 </div>
 
-<div class="panel panel-default">
-  Timeline
+<!--Wall and Timeline -->
+<ul class="nav nav-tabs wall-tabs">
+  <li class="active">
+    <a data-toggle="tab" href="#wall">
+      Wall
+    </a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#timeline">
+      Timeline
+    </a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#detail">
+      Detail
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content wall-content">
+  <div id="wall" class="tab-pane fade in active">
+      <div class="panel-body">
+        Wall posts
+      </div>
+  </div>
+  <div id="timeline" class="tab-pane fade">
+      <%=render partial: "idea_posts", collection: @idea.posts, as: :post%>
+  </div>
+  <div id="detail" class="tab-pane fade">
+      <%=render partial: "idea_detail"%>
+  </div>
 </div>

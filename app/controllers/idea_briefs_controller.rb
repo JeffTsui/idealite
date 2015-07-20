@@ -28,22 +28,14 @@ class IdeaBriefsController < ApplicationController
     respond_with(@idea_brief)
   end
 
-  #Mercury Update
+  #Update
   def update
     @idea_briefs = IdeaBrief.all
-    logger.debug "--mercury update: #{params.inspect}".light_yellow
-    set_idea_brief
     logger.debug @idea_brief.inspect.light_yellow
-    @idea_brief.title = params[:content][:title][:value]
-    @idea_brief.problem = params[:content][:problem][:value]
-    @idea_brief.target = params[:content][:target][:value]
-    @idea_brief.how = params[:content][:how][:value]
-    @idea_brief.result = params[:content][:result][:value]
-    @idea_brief.risk = params[:content][:risk][:value]
+    @idea_brief.update(idea_brief_params)
     @idea_brief.save!
-    
-    logger.debug idea_brief_path.light_blue
-    render :json=>{:url=>idea_brief_path}
+    logger.debug @uploder.inspect.light_yellow
+    redirect_to detail_idea_path(@idea_brief.idea)
   end
 
   def destroy
@@ -62,6 +54,6 @@ class IdeaBriefsController < ApplicationController
     end
 
     def idea_brief_params
-      params.require(:idea_brief).permit(:title, :problem, :target, :how, :result, :risk, :user_id)
+      params.require(:idea_brief).permit(:title, :problem, :target, :how, :result, :risk, :user_id, :short_desc)
     end
 end

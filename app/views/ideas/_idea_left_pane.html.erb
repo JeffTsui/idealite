@@ -3,16 +3,19 @@
 </div>
 
 <div class="panel panel-default">
+    <%=render "idea_teams"%>
+</div>
+
+<div class="panel panel-default">
     <div class="panel-heading">
-        <h5>
-            <span>
-                Solutions
-            </span>
-            <span class="pull-right">
-                <i class="fa fa-chevron-right small"></i>
-                <%=link_to "see all", "#", class:"small"%>
-            </span>
-        </h5>
+        <span>
+            Solutions
+            <i class="fa fa-lock"></i>
+        </span>
+        <span class="pull-right">
+            <i class="fa fa-chevron-right small"></i>
+            <%=link_to "see all", "#", class:"small"%>
+        </span>
     </div>
     <div class="panel-body">
         List of solutions (detail can be view only by team member)
@@ -21,7 +24,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h5>Milestones</h5>
+        <span>Milestones</span>
     </div>
     <div class="panel-body">
         <%=render "idea_milestone"%>
@@ -30,9 +33,18 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h5>Contributors</h5>
+        <span>Contributors</span>
     </div>
     <div class="panel-body">
         List of contributors with profile picture
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>Facts</span>
+    </div>
+    <div class="panel-body">
+        List of facts links
     </div>
 </div>
