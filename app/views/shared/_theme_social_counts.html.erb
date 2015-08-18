@@ -1,0 +1,8 @@
+<div class="small text-muted">
+  <span><%=theme.followers(User).count%> <%="watcher".pluralize(theme.followers(User).count)%></span>
+  <span>, </span>
+  <span><%=theme.theme_ideas.count%> <%="idea".pluralize(theme.theme_ideas.count)%></span>
+  <span class="pull-right">
+    <i class="<%=privacy_icon(theme.privacy_flag)%> fa-lg"></i>
+  </span>
+</div>

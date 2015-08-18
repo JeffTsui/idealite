@@ -1,0 +1,8 @@
+$("#milestone_list").html("<%= j(render(partial: '/ideas/milestone', 
+    collection: @idea.milestones, as: :milestone, spacer_template: "shared/hr_spacer"))%>");
+$("#<%=@modal_id%>").modal('hide');
+<%if @update%>
+    $(".modal-backdrop").remove();
+    $("body").removeClass('modal-open');
+    $("body").removeAttr("style");
+<%end%>

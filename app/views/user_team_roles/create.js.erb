@@ -1,0 +1,4 @@
+$("#open_roles").html("<%= j(render(partial: '/ideas/idea_team_open', 
+    collection: @idea.default_team_opens, as: :open, spacer_template: "shared/hr_spacer"))%>");
+$('#role_modal').modal('toggle');
+

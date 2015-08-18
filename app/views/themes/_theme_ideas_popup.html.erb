@@ -1,0 +1,14 @@
+<div id="theme_ideas_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Select ideas applying</h4>
+        <p class="text-muted small">from all your ideas</p>
+      </div>
+          <%=render partial: "theme_idea_option", collection: @my_ideas, as: :idea%>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+        </div>
+    </div>
+  </div>
+</div>    

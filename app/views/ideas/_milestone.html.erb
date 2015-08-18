@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <h5>
+      <i class="fa fa-shield"></i>
+      <%=link_to milestone.title, "#", 
+          :data=>{:toggle=>"modal", :target=>"#milestone_modal_#{milestone.id}"}%>
+    </h5>
+  </div>
+  <div class="row">
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="<%=milestone.progress%>" aria-valuemin="0" 
+        aria-valuemax="100" style="width:<%=milestone.progress%>%; min-width:2em">
+        <%=milestone.progress%>%
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top:-1em">
+    <span class="text-small text-info pull-left">
+      <%=milestone.start_date%>
+    </span>
+    <span class="text-small text-info pull-right">
+      <%=milestone.end_date%>
+    </span>
+  </div>
+  <div class="row">
+    <p>
+      <%=milestone.detail%>
+    </p>
+    <small class="text-muted">
+      updated at: <%=localize(milestone.updated_at, format: :short)%>
+    </small>
+    <%=link_to "Delete", milestone_path(milestone, idea_id: @idea.id), 
+      method: :delete, remote: true, class: "btn btn-default pull-right", data: {confirm: "Delete this milestone?"}%>
+  </div>
+</div>
+
+<%=render partial: "/ideas/milestone_modal", locals: {milestone: milestone, id: milestone.id}%>

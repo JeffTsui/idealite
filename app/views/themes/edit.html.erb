@@ -1,0 +1,25 @@
+<%=bootstrap_form_for(@theme) do |f|%>
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                 <%=@theme.title%>
+                </h4>
+            </div>
+            <div class="panel-body" id="edit">
+            <%=f.text_field :title%>
+            <%=f.text_area :detail, label:"Describe details:", rows:15%>
+            <%=f.text_area :reward, label:"Reward to winners:"%>
+            <%=f.text_area :policy, label:"Policy items:"%>
+            <%=f.select :privacy_flag, options_for_select(privacy_options_for_select, @theme.privacy_flag), 
+                label:"Can be seen by:"%>
+            </div>
+        </div>
+    </div>
+
+    <div class="pull-right">
+        <%=f.submit "Save", class:"btn btn-success"%>
+        <%=link_to "Cancel", :back, class:"btn btn-default"%>
+    </div>
+
+<%end%>

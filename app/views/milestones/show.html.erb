@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Idea:</strong>
+  <%= @milestone.idea_id %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @milestone.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @milestone.end_date %>
+</p>
+
+<p>
+  <strong>Progress:</strong>
+  <%= @milestone.progress %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @milestone.title %>
+</p>
+
+<p>
+  <strong>Detail:</strong>
+  <%= @milestone.detail %>
+</p>
+
+<p>
+  <strong>Critical flag:</strong>
+  <%= @milestone.critical_flag %>
+</p>
+
+<%= link_to 'Edit', edit_milestone_path(@milestone) %> |
+<%= link_to 'Back', milestones_path %>

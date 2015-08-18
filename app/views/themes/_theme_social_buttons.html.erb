@@ -1,0 +1,24 @@
+<div id="theme_social_counts" class="row">
+    <%=render partial: "shared/theme_social_counts", locals: {theme: @theme}%>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-4 text-center">
+    <%=link_to(like_theme_path(@theme.id, :type=>"follow"), 
+      class:"idea-title-fa #{follow_css(@theme)}", remote: true) do%>
+      <i class="fa fa-2x fa-eye"></i>
+      <span class="idea-title-fa-subtitle">Watch</span>
+    <%end%>
+  </div>
+  <div class="col-md-4 text-center">
+    <%=link_to("#", class:"idea-title-fa", :data=>{:toggle=>"modal", :target=>"#theme_ideas_modal"}) do%>
+      <i class="fa fa-2x fa-lightbulb-o"></i>
+      <span class="idea-title-fa-subtitle">Answer</span>
+    <%end%>
+  </div>
+  <div class="col-md-4">
+  </div>
+</div>
+
+<%=render "theme_ideas_popup"%>  
+

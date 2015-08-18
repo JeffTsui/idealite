@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Theme:</strong>
+  <%= @theme_idea.theme_id %>
+</p>
+
+<p>
+  <strong>Idea:</strong>
+  <%= @theme_idea.idea_id %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @theme_idea.score %>
+</p>
+
+<%= link_to 'Edit', edit_theme_idea_path(@theme_idea) %> |
+<%= link_to 'Back', theme_ideas_path %>

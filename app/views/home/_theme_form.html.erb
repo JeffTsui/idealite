@@ -1,0 +1,12 @@
+<div>
+    <%=bootstrap_form_tag(url: claim_theme_themes_path) do |f|%>
+        <div class="input-group">
+            <%= f.text_field :text, hide_label:true, 
+                placeholder:"Create a theme for calling ideas or categorize ideas."%>
+            <span class="input-group-btn">
+                <%= f.submit "Create", class:"btn btn-success"%>
+            </span>
+        </div>
+    <%end%>
+</div>
+

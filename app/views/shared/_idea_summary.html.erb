@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <%=image_tag idea.idea_brief.avatar_url, width:"100"%>
+    </div>
+    <div class="col-md-9">
+      <div class="row-fluid">
+        <h5>
+          <%=link_to idea.idea_brief.title, idea_path(idea), class: "idea_title"%> - 
+          <%=idea.idea_brief.short_desc%>
+        </h5>
+        </span>
+        <div class="row">
+          <div class="col-md-8">
+            <%=render partial: "shared/idea_social_counts", locals: {idea: idea}%>
+          </div>
+        </div>
+      </div>
+      <p>
+        <%=render partial: "shared/idea_tags", locals: {idea: idea, limit: 5}%>
+      </p>
+      <p>
+        <%=render partial: "shared/idea_audiences", locals: {idea: idea}%>
+      </p>
+      <p>
+        <%=truncate(strip_tags(idea.idea_brief.how), length: 200)%>
+      </p>
+    </div>
+  </div>
+</div>

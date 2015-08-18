@@ -1,0 +1,13 @@
+<div>
+    <img src=<%=member.image_url%> class="navbar-img img-thumbnail" alt="profile image" width="60",  height="60">                          
+    <%=link_to member.name, user_path(member.id), class:"member_name"%>
+    <div class="pull-right">
+    <span class="text-info"><%=@idea.user_role_desc(member.id)%></span>
+    <p class="text-muted">
+        Joined: <%=localize(joined_date(member.id), format: "%F")%>
+    </p>
+    </div>
+    <p>
+        <%=member.profile.desc%>
+    </p>
+</div>

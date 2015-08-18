@@ -1,0 +1,5 @@
+<div>
+    <img src=<%=member.image_url%> class="navbar-img img-thumbnail" alt="profile image" width="30",  height="30">                          
+    <%=link_to member.name, user_path(member.id)%>
+    <span class="pull-right text-info"><%=@idea.user_role_desc(member.id)%></span>
+</div>

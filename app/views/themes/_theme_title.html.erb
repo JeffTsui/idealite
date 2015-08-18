@@ -1,0 +1,12 @@
+<div class="panel-body">
+    <p class="theme-banner">
+        <i class="fa fa-th-large fa-lg"></i>
+        <span>Theme</span>
+    </p>
+    <h4><%=link_to @theme.title, theme_path(@theme), class: "theme_title"%></h4>
+    <p class="small text-muted"><%=truncate(@theme.detail, length: 200)%></p>
+    <div id="idea_social_buttons" class="container-fluid">
+        <%=render "theme_social_buttons"%>
+    </div>
+</div>
+

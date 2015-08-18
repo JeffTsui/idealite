@@ -1,0 +1,54 @@
+<ul class="nav nav-tabs wall-tabs">
+  <li class="<%=toggle_active_li("default")%>">
+    <a data-toggle="tab" href="#team">
+      Team
+    </a>
+  </li>
+  <li class="<%=toggle_active_li("open")%>">
+    <a data-toggle="tab" href="#open">
+      Opens
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content wall-content">
+  <div id="team" class="tab-pane <%=toggle_active_tab("default")%>">
+    <%=render partial: "idea_team_member", collection: @idea.default_team_members, as: :member%>
+  </div>
+  <div id="open" class="tab-pane <%=toggle_active_tab("open")%>">
+    <div class="row-fluid">
+      <span class="wall-title">Open roles</span>
+      <%=link_to "Add New", "#", class:"btn btn-success pull-right", 
+          :data=>{:toggle=>"modal", :target=>"#role_modal"}%>
+    </div>
+    <hr>
+    <div id="open_roles">
+      <%=render partial: "idea_team_open", collection: @idea.default_team_opens, as: :open, 
+        spacer_template: "shared/hr_spacer"%>
+    </div>
+  </div>
+</div>
+
+
+  <div id="role_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add new open role</h4>
+          <p class="text-muted small"></p>
+        </div>
+          <%=bootstrap_form_for(@role, remote: true) do |f|%>
+            <div class="modal-body">
+              <%=f.hidden_field :team_id, value: @idea_team.id%>
+              <%=f.hidden_field :idea_id, value: @idea.id%>
+              <%=f.text_field :role_name, label: "Role name"%>
+              <%=f.text_area :desc, label: "Role description", rows: 5%>
+            </div>
+            <div class="modal-footer">
+                <%= submit_tag "OK", class:"btn btn-primary"%>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        <%end%>
+      </div>
+    </div>
+  </div>    

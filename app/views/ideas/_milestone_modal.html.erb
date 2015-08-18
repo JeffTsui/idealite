@@ -1,0 +1,38 @@
+<div id="milestone_modal_<%=id%>" class="modal fade" role="dialog" tabindex="-1">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Milestone</h4>
+      <p class="text-muted small"></p>
+    </div>
+      <p>
+        <% if milestone.errors.any? %>
+          <div id="error_explanation">
+            <ul>
+            <% milestone.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </p>
+      <%=bootstrap_form_for(milestone, remote: true, validate: true) do |f|%>
+        <div class="modal-body">
+          <%=f.hidden_field :idea_id, value: @idea.id%>
+          <%=f.hidden_field :milestone_id, value: milestone.id%>
+          <%=f.hidden_field :modal_id, value: "milestone_modal_#{id}"%>
+          <%=f.text_field :title, label: "Title"%>
+          <%=f.date_select :start_date, default: Time.now, label: "Start"%>
+          <%=f.date_select :end_date, label: "End", selected: Date.today%>
+          <%=f.text_area :detail, label: "Detail", rows: 5%>
+          <%=f.number_field :progress, label: "Progress", default: 0, append: "%"%>
+        </div>
+        <div class="modal-footer">
+            <%= submit_tag "OK", class:"btn btn-primary"%>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+    <%end%>
+  </div>
+</div>
+</div>    
+

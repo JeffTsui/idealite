@@ -1,0 +1,29 @@
+<h1>Listing theme_ideas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Theme</th>
+      <th>Idea</th>
+      <th>Score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @theme_ideas.each do |theme_idea| %>
+      <tr>
+        <td><%= theme_idea.theme_id %></td>
+        <td><%= theme_idea.idea_id %></td>
+        <td><%= theme_idea.score %></td>
+        <td><%= link_to 'Show', theme_idea %></td>
+        <td><%= link_to 'Edit', edit_theme_idea_path(theme_idea) %></td>
+        <td><%= link_to 'Destroy', theme_idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Theme idea', new_theme_idea_path %>

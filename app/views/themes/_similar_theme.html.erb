@@ -1,0 +1,21 @@
+<div class="container-fluid" style="margin-bottom:0.5em">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row-fluid">
+        <h5>
+          <%=link_to similar_theme.title, theme_path(similar_theme)%>
+        </h5>
+        </span>
+        <div class="row">
+          <div class="col-md-5">
+          </div>
+        </div>
+      </div>
+      <p>
+      </p>
+      <p>
+        <%=truncate(strip_tags(similar_theme.detail), length: 200)%>
+      </p>
+    </div>
+  </div>
+</div>

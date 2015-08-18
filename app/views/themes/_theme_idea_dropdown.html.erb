@@ -1,0 +1,12 @@
+<div id="link_dropdown_<%=idea.id%>" class="dropdown">
+    <button type="button" class="btn btn-default dropdown-toggle" 
+      data-toggle="dropdown">
+        <span id=""> <%=link_label(@theme.link_value(idea.id, current_user.id), 
+          ThemeIdea::LINK_OPTIONS)%></span>
+    </button>
+    <ul id="" class="dropdown-menu">
+        <%=render partial: "link_dropdown_option", collection: ThemeIdea::LINK_OPTIONS, 
+          as: :option, locals: {idea: idea}%>
+    </ul>
+</div>
+

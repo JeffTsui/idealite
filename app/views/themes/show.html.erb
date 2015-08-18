@@ -1,0 +1,25 @@
+<ul class="nav nav-tabs wall-tabs">
+  <li class="active">
+    <a data-toggle="tab" href="#answer">
+      Answered Ideas
+    </a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#detail">
+      Detail
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content wall-content">
+  <div id="answer" class="tab-pane fade in active">
+      <div class="panel-body">
+        <%=render partial: "shared/idea_summary", collection: applied_ideas, as: :idea, 
+          spacer_template: "shared/idea_summary_spacer"%>
+      </div>
+  </div>
+  <div id="detail" class="tab-pane fade">
+      <%=render partial: "theme_detail"%>
+  </div>
+</div>
+

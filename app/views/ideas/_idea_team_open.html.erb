@@ -1,0 +1,14 @@
+<div>
+    <div>
+        <h5><%=open.role_name%></h5>
+        <span class="text-muted">opened: <%=localize(open.created_at, format: "%F")%></span>
+        <div id="apply_role_<%=open.id%>" class="pull-right">
+            <%=link_to apply_btn_label(open.id, current_user.id), 
+                apply_user_team_role_path(open.id, team_id:@idea_team.id), 
+                class: "btn btn-default", method: :put, remote: true%>
+        </div>
+    </div>
+    <div>
+        <p><%=open.desc%></p>
+    </div>
+</div>

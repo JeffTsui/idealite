@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @user_team_role.team_id %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @user_team_role.role %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @user_team_role.desc %>
+</p>
+
+<p>
+  <strong>Open flag:</strong>
+  <%= @user_team_role.open_flag %>
+</p>
+
+<%= link_to 'Edit', edit_user_team_role_path(@user_team_role) %> |
+<%= link_to 'Back', user_team_roles_path %>

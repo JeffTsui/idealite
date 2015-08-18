@@ -1,0 +1,43 @@
+<%if @survey && @survey.avaliable_for_participant?(current_user)%>
+  <div>
+    <span class="text-info" >
+      <i class="fa fa-pencil-square-o"></i>
+      Survey: 
+      <%=link_to  @survey.primary_question.text, "#", 
+        :data=>{:toggle=>"modal", :target=>"#survey_answer"}%>
+  </div>
+<%end%>
+<div>
+  <%=render partial: "idea_posts", collection: @idea.posts, as: :post%>
+</div>
+
+<%if @survey%>
+<div id="survey_answer" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><%=@survey.primary_question.text%></h4>
+        <p class="text-muted small"></p>
+      </div>
+          <%=bootstrap_form_for(@attempt, url: attempt_idea_path) do |f| %>
+            <div class="modal-body">
+              <%=collection_radio_buttons('attempt[answers]', @survey.primary_question.id, 
+                @survey.primary_question.options, :id, :text) do |b|%>
+                <p>
+                  <span>
+                    <%=b.radio_button%>
+                  </span>
+                  <span style="padding-left:1em">
+                    <%=b.text%>
+                  </span>
+                </p>
+              <%end%>
+            </div>
+            <div class="modal-footer">
+              <%=f.submit "Submit", class: "btn btn-success pull-right"%>
+            </div>
+          <%end%>
+      </div>
+    </div>
+</div>
+<%end%>

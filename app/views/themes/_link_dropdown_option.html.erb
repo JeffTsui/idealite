@@ -1,0 +1,7 @@
+<li>
+  <%=link_to(apply_idea_theme_path(@theme, value:option[:value], idea_id: idea.id), remote: true, method: :put) do%>
+    <span id=""> 
+      <%=option[:label]%>
+    </span>
+  <%end%>
+</li>

@@ -1,0 +1,14 @@
+<div class="row-fluid">
+  <span class="wall-title">Milestones</span>
+  <%=link_to "Add New", "#", class: "btn btn-success pull-right", 
+    :data=>{:toggle=>"modal", :target=>"#milestone_modal_new"}%>
+</div>
+
+<hr>
+
+<div id="milestone_list">
+  <%=render partial: '/ideas/milestone', 
+      collection: @idea.milestones, as: :milestone, spacer_template: "shared/hr_spacer"%>
+</div>
+
+<%=render partial: "/ideas/milestone_modal", locals: {milestone: @new_milestone, id: "new"}%>

@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div>
+        <h5>
+            <i class="fa fa-pencil-square-o"></i>
+            <%=survey.primary_question.text%>
+        </h5>
+        <span class="text-muted small">
+        Created at: <%=localize(survey.created_at, format: "%F")%>, 
+        Total answers: <%=survey.answers.count%>
+        </span>
+    </div>
+    <div style="margin-bottom:0em">
+      <%=pie_chart(survey.answer_count_array, id: "pie_chart_#{survey.id}", 
+        library: {pieHole: 0.3, pieSliceTextStyle: {color:"black"}, 
+        sliceVisibilityThreshold: 0})%>
+    </div>
+    <div class="pull-right">
+      <%if not survey.finished%>
+        <%=link_to "Close", finish_survey_idea_path(survey_id: survey.id), method: :put, 
+          data: {confirm: "Close this poll?"}, class: "btn btn-info"%>
+      <%end%>
+      <%=link_to "Delete", delete_survey_idea_path(survey_id: survey.id), method: :put, 
+        data: {confirm: "Delete this poll?"}, class: "btn btn-default"%>
+    </div>
+</div>

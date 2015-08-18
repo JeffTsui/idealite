@@ -1,0 +1,8 @@
+<%if idea.idea_brief.audience_list.count > 0%>
+  <span>Audience:</span>
+  <%idea.idea_brief.audience_list.each do |audience|%>
+    <span class="audience_tag">
+      <%=audience%>
+    </span>
+  <%end%>
+<%end%>
