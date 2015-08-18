@@ -1,1 +1,23 @@
-<%=render 'idea_form'%>
+<!--Idea Forms -->
+<ul class="nav nav-tabs wall-tabs">
+  <li class="active">
+    <a data-toggle="tab" href="#idea">
+      Claim an Idea!
+    </a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#theme">
+      Need an Idea?
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content wall-content">
+  <div id="idea" class="tab-pane fade in active">
+    <%=render 'idea_form'%>
+  </div>
+  <div id="theme" class="tab-pane fade">
+    <%=render 'theme_form'%>
+  </div>
+</div>
+

@@ -3,8 +3,8 @@
   <span>, </span>
   <span><%=idea.followers(User).count%> <%="watcher".pluralize(idea.followers(User).count)%></span>
   <span>, </span>
-  <span><%=idea.likers(User).count%> <%="link".pluralize(idea.likers(User).count)%></span>
+  <span><%=idea.idea_links.count%> <%="link".pluralize(idea.idea_links.count)%></span>
   <span class="pull-right">
-    <i class="<%=idea_privacy_icon(idea.privacy_flag)%> fa-lg"></i>
+    <i class="<%=privacy_icon(idea.privacy_flag)%> fa-lg"></i>
   </span>
 </div>

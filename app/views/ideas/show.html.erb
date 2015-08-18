@@ -1,34 +1,13 @@
 <!--Post Forms -->
-<ul class="nav nav-tabs wall-tabs">
-  <li class="active">
-    <a data-toggle="tab" href="#post">
-      Post
-    </a>
-  </li>
-  <li>
-    <a data-toggle="tab" href="#poll">
-      Poll
-    </a>
-  </li>
-</ul>
-
-<div class="tab-content wall-content">
-  <div id="post" class="tab-pane fade in active">
+<div class="panel panel-default">
+  <div>
       <%=render "idea_post_form"%>
-  </div>
-  <div id="poll" class="tab-pane fade">
-      <%=render "idea_survey_form"%>
   </div>
 </div>
 
 <!--Wall and Timeline -->
 <ul class="nav nav-tabs wall-tabs">
-  <li class="active">
-    <a data-toggle="tab" href="#wall">
-      Wall
-    </a>
-  </li>
-  <li>
+  <li class="<%=toggle_active_li("default")%>">
     <a data-toggle="tab" href="#timeline">
       Timeline
     </a>
@@ -38,18 +17,29 @@
       Detail
     </a>
   </li>
+  <li class="<%=toggle_active_li("milestone")%>">
+    <a data-toggle="tab" href="#milestone">
+      Milestones
+    </a>
+  </li>
+  <li class="<%=toggle_active_li("poll")%>">
+    <a data-toggle="tab" href="#poll">
+      Polls
+    </a>
+  </li>
 </ul>
 
 <div class="tab-content wall-content">
-  <div id="wall" class="tab-pane fade in active">
-      <div class="panel-body">
-        Wall posts
-      </div>
-  </div>
-  <div id="timeline" class="tab-pane fade">
-      <%=render partial: "idea_posts", collection: @idea.posts, as: :post%>
+  <div id="timeline" class="tab-pane <%=toggle_active_tab("default")%>">
+    <%=render "idea_timeline"%>
   </div>
   <div id="detail" class="tab-pane fade">
       <%=render partial: "idea_detail"%>
+  </div>
+  <div id="milestone" class="tab-pane <%=toggle_active_tab("milestone")%>">
+      <%=render partial: "idea_milestones"%>
+  </div>
+  <div id="poll" class="tab-pane <%=toggle_active_tab("poll")%>">
+      <%=render partial: "idea_polls"%>
   </div>
 </div>

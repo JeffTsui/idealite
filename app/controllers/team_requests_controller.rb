@@ -10,12 +10,11 @@ class TeamRequestsController < ApplicationController
     end
     
     def update
-        logger.debug "update request #{params[:action_type]}".light_yellow
         @action_type = params[:action_type]
         @team_request = TeamRequest.find(params[:id])
         if @action_type == "accept"
             @team_request.accept_request(current_user.id)
-            UserTeam.create(user_id: current_user.id, team_id: @team_request.team.id, role_id: 1)
+            UserTeam.accept_request(@team_request.id)
         elsif @action_type == "ignore"
             @team_request.ignore_request(current_user.id)
         end

@@ -1,6 +1,50 @@
-<h1>Editing profile</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @profile %> |
-<%= link_to 'Back', profiles_path %>
+<%=bootstrap_form_for(@profile) do |f|%>
+<div class="panel-group">
+  <div class="container-fluid" style="margin-bottom: 1em">
+    <div class="row">
+      <div class="col-md-8">
+        <span class="pull-left">
+          <img src=<%=current_user.image_url%> class="img-thumbnail" 
+            alt="profile image" width="60"  height="60"> 
+        </span>
+        <span>
+          <h3>&nbsp<%=current_user.name%></h3>      
+        </span>
+      </div>
+      <div class="col-md-4">
+        <p></p>
+        <span class="pull-right">
+          <%=f.submit "Save", class:"btn btn-success"%>
+          <%=link_to "Cancel", :back, class:"btn btn-default"%>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h5>About Me</h5>
+    </div>
+    <div class="panel-body">
+      <%=f.text_field :nickname, maxlength: 20, size: 20%>
+      <%=f.date_field :birthday%>
+      <%=f.text_field :website, prepend: "http://"%>
+      <%=f.text_area :desc, label: "About", rows: 15%>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h5>Contact Detail</h5>
+    </div>
+    <div class="panel-body">
+      <p>
+        <strong>Email:</strong>
+        <%= current_user.email %>
+      </p>
+      <%=f.telephone_field :mobile%>
+      <%=f.text_field :address, maxlength: 30%>
+      <%=f.text_field :country, maxlength: 30%>
+      <%=f.text_field :zipcode, maxlength: 30%>
+    </div>
+  </div>
+</div>
+<%end%>

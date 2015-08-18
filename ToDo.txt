@@ -32,3 +32,6 @@ https://github.com/dwilkie/carrierwave_direct
 
 *Better ENV variables management
 https://github.com/bkeepers/dotenv
+
+*Country List
+https://github.com/stefanpenner/country_select

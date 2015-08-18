@@ -15,6 +15,10 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require autocomplete-rails
+//= require bootstrap-tagsinput
+//= require twitter/typeahead
+//= require twitter/typeahead.min
+//= require data-confirm-modal
 //= require tinymce-jquery
 //= require jasny-bootstrap.min
 //= require turbolinks

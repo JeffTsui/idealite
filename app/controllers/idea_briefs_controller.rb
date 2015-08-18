@@ -31,9 +31,12 @@ class IdeaBriefsController < ApplicationController
   #Update
   def update
     @idea_briefs = IdeaBrief.all
-    logger.debug @idea_brief.inspect.light_yellow
     @idea_brief.update(idea_brief_params)
+    @idea_brief.tag_list = idea_brief_params[:idea_tags]
+    @idea_brief.audience_list = idea_brief_params[:target]
     @idea_brief.save!
+    #logger.debug "#{params[:audience]}".light_yellow
+    logger.debug "audience tag_list = #{@idea_brief.audience_list}".light_yellow
     logger.debug @uploder.inspect.light_yellow
     redirect_to detail_idea_path(@idea_brief.idea)
   end
@@ -54,6 +57,7 @@ class IdeaBriefsController < ApplicationController
     end
 
     def idea_brief_params
-      params.require(:idea_brief).permit(:title, :problem, :target, :how, :result, :risk, :user_id, :short_desc)
+      params.require(:idea_brief).permit(:title, :problem, :target, :how, :result, 
+      :risk, :user_id, :short_desc, :idea_tags, :tag_list, :audience_list)
     end
 end

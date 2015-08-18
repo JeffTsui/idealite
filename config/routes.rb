@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  
-  resources :idea_links
+  root to: 'home#index'
+  devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
+  resources :milestones
 
   resources :homes do
   end
@@ -13,16 +16,15 @@ Rails.application.routes.draw do
 
   resources :idea_teams
 
+  resources :user_team_roles do
+    put :apply, on: :member
+  end
+
   resources :profiles
 
   get 'activities/index'
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-
   resources :idea_briefs
-
-  root to: 'home#index'
-  devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
   
   resources :users
 
@@ -33,10 +35,25 @@ Rails.application.routes.draw do
     get :detail, :on => :member
     get :avatar, :on => :member
     get :aws_update_avatar, :on => :member
+    get :team, :on => :member
     post :claim_idea, on: :collection
+    post :new_survey, on: :member
+    put :finish_survey, on: :member
+    put :delete_survey, on: :member
+    post :attempt, on: :member
     put :privacy, on: :member
     put :link, on: :member
   end
+
+  resources :theme_ideas
+
+  resources :themes do
+    get :like, :on => :member
+    post :claim_theme, on: :collection
+    put :apply_idea, on: :member
+  end
+
+  resources :idea_links
 
   resources :teams do
     get :autocomplete_user_name, :on => :collection

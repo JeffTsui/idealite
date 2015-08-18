@@ -6,6 +6,21 @@
     <%=render "idea_teams"%>
 </div>
 
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>Milestones</span>
+          <span class="pull-right">
+              <i class="fa fa-chevron-right small"></i>
+              <%=link_to "see all", idea_path(pane:"milestone"), class:"small"%>
+          </span>
+    </div>
+    <div class="panel-body">
+      <%=render partial: 'milestone_small', 
+          collection: @idea.milestones, as: :milestone%>
+    </div>
+</div>
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <span>
@@ -18,25 +33,7 @@
         </span>
     </div>
     <div class="panel-body">
-        List of solutions (detail can be view only by team member)
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <span>Milestones</span>
-    </div>
-    <div class="panel-body">
-        <%=render "idea_milestone"%>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <span>Contributors</span>
-    </div>
-    <div class="panel-body">
-        List of contributors with profile picture
+        List of solutions (detail can be viewed only by team member)
     </div>
 </div>
 

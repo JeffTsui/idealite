@@ -12,6 +12,9 @@
       <p class="">
         <%=@idea_brief.short_desc%>
       </p>
+      <p>
+        <%=render partial: "shared/idea_tags", locals: {idea: @idea}%>
+      </p>
     </div>
   </div>
   <div class="row" style="padding-top:2em">
@@ -33,9 +36,8 @@
 <div class="container-fluid">
   <div>
     <h4>Who this is for?</h4>
-    <%=raw @idea_brief.target %>
+      <%=render partial: "shared/idea_audiences", locals: {idea: @idea}%>
   </div>
-  
   <div>
     <div>
       <h4>How does this work?</h4>

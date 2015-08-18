@@ -1,5 +1,9 @@
 <h4>
+    Top Grossing Themes
+</h4>
+<%=render partial: "top_grossing_theme", collection: @top_grossing_themes, as: :theme%>
+
+<h4>
     Top Grossing Ideas
 </h4>
-
-<%=render partial: "top_grossing_idea", collection: @top_grossing_ideas, as: :idea%>
+<%=render partial: "my_top_idea", collection: @top_grossing_ideas, as: :idea%>

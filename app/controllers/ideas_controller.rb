@@ -1,10 +1,14 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_idea, only: [:show, :edit, :update, :destroy, 
-    :update_teams, :post_actor_id, :save_session_idea, :like, :detail, :avatar, :aws_update_avatar, :privacy, :link]
-  before_action :init, only: [:show, :detail, :edit, :avatar, :aws_update_avatar, :link]
+    :update_teams, :post_actor_id, :save_session_idea, :like, :detail, :avatar, :aws_update_avatar, 
+    :privacy, :link, :finish_survey, :delete_survey]
+  before_action :init, only: [:show, :detail, :edit, :avatar, :aws_update_avatar, :link, :team, 
+  :new_survey, :attempt]
   
   respond_to :html, :json
+  
+  include Survey
 
   # GET /ideas
   # GET /ideas.json
@@ -16,9 +20,10 @@ class IdeasController < ApplicationController
   # GET /ideas/1.json
   def show
     @post = Post.new
+    @attempt = Attempt.new(survey: @survey, participant: current_user)
     @post_actor_cat = ["me","team"]
     @watched_ideas = Idea.watched_ideas(current_user)
-    logger.debug "watched_ideas: #{@watched_ideas.map {|i| i.id}}".light_yellow
+    @new_milestone = Milestone.new    
   end
   
   def detail
@@ -126,6 +131,46 @@ class IdeasController < ApplicationController
     end
   end
   
+  def team
+    @role = UserTeamRole.new  
+  end
+  
+  def new_survey
+    s = Survey.new(name: "idea #{@idea.id}", 
+      description: @idea.idea_brief.title, attempts_number: 1)
+    question = Question.new(text: params[:question])
+    params[:options].each do |k,v|
+      logger.debug "k = #{k}, v = #{v}"
+      (question.options << Option.new(text: v)) if !v.empty?
+    end
+    s.questions = [question]    
+    s.active = true
+    s.save!
+    IdeaSurvey.create(idea_id: @idea.id, survey_id: s.id)
+    redirect_to @idea
+  end
+  
+  def finish_survey
+    survey = Survey.find(params[:survey_id])
+    survey.update(finished: true)
+    redirect_to idea_path(@idea, pane: "poll")
+  end
+  
+  def delete_survey
+    Survey.destroy(params[:survey_id])
+    redirect_to idea_path(@idea, pane: "poll")
+  end
+  
+  def attempt
+    attempt = Attempt.new(survey: @survey, participant: current_user)
+    option = Option.find(params[:attempt][:answers][:"#{@survey.primary_question.id}"])
+    answer = Answer.new(question: @survey.primary_question, option: option)
+    attempt.answers = [answer]
+    attempt.save
+    logger.debug "answer is #{answer.inspect}".light_yellow
+    redirect_to idea_path(@idea, pane: "poll")
+  end
+  
   # POST /ideas
   # POST /ideas.json
   def create
@@ -172,10 +217,14 @@ class IdeasController < ApplicationController
     #Initialize for idea page
     #save current idea to session
     def init
+      set_idea
       @teams_admined = Team.teams_admined(current_user.id)
       @idea_teams = @idea.teams
       @my_idea_teams =  @idea.my_idea_teams(current_user.id)
+      @idea_members = @idea.default_team_members
       @idea_brief = @idea.idea_brief
+      @idea_team = @idea.default_team
+      @survey = @idea.active_survey
       if @idea.is_my_idea?(current_user.id)
         logger.debug "saving current idea #{@idea.id} to session".light_blue
         session[:idea_id] = @idea.id

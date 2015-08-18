@@ -6,7 +6,8 @@
         <p class="text-muted small">from ideas you are watching</p>
       </div>
   
-          <%=render partial: "link_watched_idea", collection: @watched_ideas, as: :idea%>
+          <%=render partial: "link_watched_idea", collection: @watched_ideas, as: :idea, 
+            spacer_template: "shared/hr_spacer"%>
   
         <div class="modal-footer">
             <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>

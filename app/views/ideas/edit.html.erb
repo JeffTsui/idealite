@@ -8,8 +8,9 @@
             </div>
             <div class="panel-body" id="edit">
             <%=f.text_field :title%>
-            <%=f.text_field :short_desc, label:"Sum it up in one line"%>
-            <%=f.text_field :target, label:"Who this is for?"%>
+            <%=f.text_field :short_desc, label:"Sum it up in one line:"%>
+            <%=f.text_field :idea_tags, label:"Tags:", "data-role"=>"tagsinput"%>
+            <%=f.text_field :target, label:"Who this is for?", "data-role"=>"tagsinput"%>
             <%=f.text_area :how, label:"How this works in detail?", rows:15 %>
             <%= tinymce%>
             <%=f.text_area :risk, label:"What can go wrong?" %>

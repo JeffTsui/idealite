@@ -3,7 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .wall-title {
-    padding-left: 1em;
+    font-size: 120%;
+    font-weight: bold;
 }
 
 .wall-content {
@@ -38,4 +39,27 @@
     font-size:xx-small;
     font-weight: bold;
     text-align: center;
+}
+
+.audience_tag {
+    white-space:nowrap;
+    border-bottom :1px dotted #ddd;
+    margin-right: 0.5em;
+    color: MidnightBlue;
+}
+
+.idea_tag {
+    white-space:nowrap;
+    position:relative;   
+    margin-right: 0.5em;
+    padding: 2px 5px 2px 5px;
+    border-radius: 5px;    
+    color: MidnightBlue;
+    background: #E8EDF0;
+}
+
+.member_name {
+    font-family: Sans-serif;
+    font-weight: bold;
+    font-size: 110%;
 }

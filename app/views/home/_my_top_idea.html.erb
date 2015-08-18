@@ -7,9 +7,10 @@
                 </span>
             </div>
             <div class="col-md-9">
-                <h6 style="font-weight:bold; padding-left:0.5em">
-                    <%=link_to truncate(idea.idea_brief.title, length: 70), idea_path(idea)%>
-                </h6>
+                <span style="padding-left:0.2em">
+                    <%=link_to truncate(idea.idea_brief.title, length: 70), 
+                        idea_path(idea), class:"idea_title"%>
+                </span>
             </div>
         </div>
         <p style="margin-top:0.5em">

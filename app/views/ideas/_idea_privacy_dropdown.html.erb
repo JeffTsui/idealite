@@ -1,8 +1,8 @@
 <div id="idea_privacy_dropdown" class="dropdown">
     <button type="button" class="btn btn-default dropdown-toggle" 
       data-toggle="dropdown">
-        <i class="<%=idea_privacy_icon(@idea.privacy_flag)%>"></i>
-        <span id=""> <%=idea_privacy_label(@idea.privacy_flag)%></span>
+        <i class="<%=privacy_icon(@idea.privacy_flag)%>"></i>
+        <span id=""> <%=privacy_label(@idea.privacy_flag)%></span>
     </button>
     <ul id="" class="dropdown-menu">
         <%=render partial: "idea_privacy_dropdown_option", collection: [0,1,2], as: :value%>

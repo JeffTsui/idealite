@@ -1,11 +1,25 @@
 <div class="panel-heading">
-  Teams
+  <span>
+    Team
+  </span>
+  <span class="pull-right">
+      <i class="fa fa-chevron-right small"></i>
+      <%=link_to "see all", team_idea_path, class:"small"%>
+  </span>
 </div>
 <div class="panel-body">
-  <i class="fa fa-group text-primary"></i>
-  <%=link_to "Teams:", "#", class:"text-primary", 
-      :data=>{:toggle=>"modal", :target=>"#idea_teams_modal"}%>
-  <%= render partial:"idea_teams_list", collection: @idea_teams, as: :idea_team%>
+  <%= render partial:"idea_members_list", collection: @idea_members, as: :member%>
+  <% if @idea_team.open_roles.count > 0 %>
+  <p></p>
+  <div class="pull-right text-danger">
+    <span class="text-danger">
+      Opens available!
+    </span>
+    <%=link_to(team_idea_path(pane: "open")) do%>
+      <i class="fa fa-plus-circle fa-lg"></i>
+    <% end %>
+  </div>
+  <% end %>
 </div>
   
   <div id="idea_teams_modal" class="modal fade" role="dialog">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718143400) do
+ActiveRecord::Schema.define(version: 20150812040325) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20150718143400) do
     t.string   "short_desc"
     t.string   "image_url"
     t.string   "avatar"
+    t.string   "idea_tags"
   end
 
   add_index "idea_briefs", ["user_id"], name: "index_idea_briefs_on_user_id"
@@ -105,6 +106,17 @@ ActiveRecord::Schema.define(version: 20150718143400) do
   add_index "idea_links", ["idea_id"], name: "index_idea_links_on_idea_id"
   add_index "idea_links", ["idea_linked_id"], name: "index_idea_links_on_idea_linked_id"
   add_index "idea_links", ["link_type"], name: "index_idea_links_on_link_type"
+
+  create_table "idea_surveys", force: true do |t|
+    t.integer  "idea_id"
+    t.integer  "survey_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "idea_surveys", ["idea_id", "survey_id"], name: "index_idea_surveys_on_idea_id_and_survey_id", unique: true
+  add_index "idea_surveys", ["idea_id"], name: "index_idea_surveys_on_idea_id"
+  add_index "idea_surveys", ["survey_id"], name: "index_idea_surveys_on_survey_id"
 
   create_table "idea_teams", force: true do |t|
     t.integer  "idea_id"
@@ -160,6 +172,20 @@ ActiveRecord::Schema.define(version: 20150718143400) do
     t.datetime "updated_at"
   end
 
+  create_table "milestones", force: true do |t|
+    t.integer  "idea_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "progress"
+    t.string   "title"
+    t.text     "detail"
+    t.boolean  "critical_flag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "milestones", ["idea_id"], name: "index_milestones_on_idea_id"
+
   create_table "post_actors", force: true do |t|
     t.integer  "post_id"
     t.string   "post_actor_type"
@@ -199,7 +225,71 @@ ActiveRecord::Schema.define(version: 20150718143400) do
     t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "desc"
   end
+
+  create_table "survey_answers", force: true do |t|
+    t.integer  "attempt_id"
+    t.integer  "question_id"
+    t.integer  "option_id"
+    t.boolean  "correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "survey_attempts", force: true do |t|
+    t.integer "participant_id"
+    t.string  "participant_type"
+    t.integer "survey_id"
+    t.boolean "winner"
+    t.integer "score"
+  end
+
+  create_table "survey_options", force: true do |t|
+    t.integer  "question_id"
+    t.integer  "weight",      default: 0
+    t.string   "text"
+    t.boolean  "correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "survey_questions", force: true do |t|
+    t.integer  "survey_id"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "survey_surveys", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "attempts_number", default: 0
+    t.boolean  "finished",        default: false
+    t.boolean  "active",          default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", force: true do |t|
+    t.string  "name"
+    t.integer "taggings_count", default: 0
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
 
   create_table "team_requests", force: true do |t|
     t.integer  "team_id"
@@ -209,7 +299,12 @@ ActiveRecord::Schema.define(version: 20150718143400) do
     t.integer  "action"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "role_id"
+    t.string   "requester_comment"
+    t.string   "approver_comment"
   end
+
+  add_index "team_requests", ["team_id", "user_id", "role_id"], name: "index_team_requests_on_team_id_and_user_id_and_role_id", unique: true
 
   create_table "teams", force: true do |t|
     t.string   "name"
@@ -221,6 +316,52 @@ ActiveRecord::Schema.define(version: 20150718143400) do
   end
 
   add_index "teams", ["user_id"], name: "index_teams_on_user_id"
+
+  create_table "theme_ideas", force: true do |t|
+    t.integer  "theme_id"
+    t.integer  "idea_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "link_type"
+  end
+
+  add_index "theme_ideas", ["idea_id"], name: "index_theme_ideas_on_idea_id"
+  add_index "theme_ideas", ["link_type"], name: "index_theme_ideas_on_link_type"
+  add_index "theme_ideas", ["theme_id"], name: "index_theme_ideas_on_theme_id"
+
+  create_table "themes", force: true do |t|
+    t.string   "title"
+    t.string   "reward"
+    t.string   "policy"
+    t.integer  "type"
+    t.integer  "privacy_flag"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "detail"
+  end
+
+  add_index "themes", ["privacy_flag"], name: "index_themes_on_privacy_flag"
+  add_index "themes", ["team_id"], name: "index_themes_on_team_id"
+  add_index "themes", ["user_id"], name: "index_themes_on_user_id"
+
+  create_table "user_team_roles", force: true do |t|
+    t.integer  "team_id"
+    t.integer  "role_id"
+    t.string   "desc"
+    t.boolean  "open_flag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "role_name"
+    t.integer  "open_number"
+  end
+
+  add_index "user_team_roles", ["team_id", "role_id"], name: "index_user_team_roles_on_team_id_and_role_id", unique: true
+  add_index "user_team_roles", ["team_id"], name: "index_user_team_roles_on_team_id"
 
   create_table "user_teams", force: true do |t|
     t.integer  "user_id"

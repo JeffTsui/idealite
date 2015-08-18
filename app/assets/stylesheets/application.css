@@ -13,6 +13,7 @@
  *= require font-awesome
  *= require jquery-ui
  *= require rails_bootstrap_forms
+ *= require bootstrap-tagsinput
  *= require jasny-bootstrap.min
  *= require_tree .
  *= require_self
@@ -23,14 +24,16 @@
 }
 
 a {
-    outline: 0;
+    outline: 0 !important;
 }
 
-.vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
-    background: red;
+a:hover {
+    background: none;
+    color: steelblue;
+}
+
+.link {
+    color: darkslateblue;
 }
 
 * Equal height columns of Bootstrap grid 
@@ -56,11 +59,11 @@ a {
     background:red;
     position:relative;
     top: -20px;
-    left: -15px;
+    right: 15px;
 }
 
 .topbar-icon-group{
-    width:58px;
+    width:65px;
     display:inline-block;
 }
 
@@ -81,4 +84,33 @@ a {
 /* fa icon for items, such as dropdown */
 .item-fa {
     margin-right: 0.5em;
+}
+
+.idea_title {
+    color: steelblue !important;
+    font-size: 105%;
+    font-weight: bold;
+}
+
+.idea_title:hover {
+    color: deepskyblue !important;
+    background: none;
+    text-decoration: none;
+}
+
+.theme_title {
+    color: darkolivegreen !important;
+    font-size: 105%;
+    font-weight: bold;
+}
+
+.theme_title:hover {
+    color: seagreen !important;
+    background: none;
+    text-decoration: none;
+}
+
+.required:after {
+    color: firebrick;
+    content:" *";
 }

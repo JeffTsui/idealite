@@ -1,6 +1,6 @@
 <li>
   <%=link_to(privacy_idea_path(@idea, value:value), remote: true, method: :put) do%>
-    <i class="<%=idea_privacy_icon(value)%>"></i>
-    <span id=""> <%=idea_privacy_label(value)%></span>
+    <i class="<%=privacy_icon(value)%>"></i>
+    <span id=""> <%=privacy_label(value)%></span>
   <%end%>
 </li>

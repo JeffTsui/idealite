@@ -1,69 +1,71 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Profile:</strong>
-  <%= @profile.profile_id %>
-</p>
-
-<p>
-  <strong>Profile type:</strong>
-  <%= @profile.profile_type %>
-</p>
-
-<p>
-  <strong>Nickname:</strong>
-  <%= @profile.nickname %>
-</p>
-
-<p>
-  <strong>Birthday:</strong>
-  <%= @profile.birthday %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @profile.phone %>
-</p>
-
-<p>
-  <strong>Mobile:</strong>
-  <%= @profile.mobile %>
-</p>
-
-<p>
-  <strong>Fax:</strong>
-  <%= @profile.fax %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @profile.address %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @profile.city %>
-</p>
-
-<p>
-  <strong>Province:</strong>
-  <%= @profile.province %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @profile.country %>
-</p>
-
-<p>
-  <strong>Zipcode:</strong>
-  <%= @profile.zipcode %>
-</p>
-
-<p>
-  <strong>Website:</strong>
-  <%= @profile.website %>
-</p>
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+<div class="panel-group">
+  <div class="container-fluid" style="margin-bottom: 1em">
+    <div class="row">
+      <div class="col-md-8">
+        <span class="pull-left">
+          <img src=<%=current_user.image_url%> class="img-thumbnail" 
+            alt="profile image" width="60"  height="60"> 
+        </span>
+        <span>
+          <h3>&nbsp<%=current_user.name%></h3>      
+        </span>
+      </div>
+      <div class="col-md-4">
+        <p></p>
+        <span class="pull-right">
+          <%=link_to "Edit", edit_profile_path(@profile), class:"btn btn-success"%>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h5>About Me</h5>
+    </div>
+    <div class="panel-body">
+      <p>
+        <strong>Nickname:</strong>
+        <%= @profile.nickname %>
+      </p>
+      <p>
+        <strong>Birthday:</strong>
+        <%= @profile.birthday %>
+      </p>
+      <p>
+        <strong>Website:</strong>
+        <%= @profile.website %>
+      </p>
+      <p>
+        <strong>About:</strong>
+        <%= @profile.desc %>
+      </p>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h5>Contact Detail</h5>
+    </div>
+    <div class="panel-body">
+      <p>
+        <strong>Email:</strong>
+        <%= current_user.email %>
+      </p>
+      <p>
+        <strong>Mobile:</strong>
+        <%= @profile.mobile %>
+      </p>
+      <p>
+        <strong>Address:</strong>
+        <%= @profile.address %>
+      </p>
+      <p>
+        <strong>Country:</strong>
+        <%= @profile.country %>
+      </p>
+      <p>
+        <strong>Zipcode:</strong>
+        <%= @profile.zipcode %>
+      </p>
+    </div>
+  </div>
+</div>

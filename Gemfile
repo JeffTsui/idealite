@@ -105,3 +105,21 @@ gem 'attribute-defaults'
 
 #Log Buddy
 gem 'log_buddy'
+
+#Act as taggable
+gem 'acts-as-taggable-on'
+
+#Bootstrap Tags Input
+gem 'bootstrap-tagsinput-rails'
+
+#Type ahead
+gem 'twitter-typeahead-rails'
+
+#Confirm Modal
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+
+#Survey
+gem 'survey', "~> 0.1"
+
+#Chartkick
+gem 'chartkick'

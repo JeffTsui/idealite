@@ -5,11 +5,17 @@ class Idea < ActiveRecord::Base
     belongs_to :idea_brief
     has_many :idea_teams
     has_many :teams, through: :idea_teams
+#    has_one :default_idea_team, ->{where "idea_teams.role_id = 0"}, class_name: "IdeaTeam"
+#    has_one :default_team, through: :default_idea_team, class_name: "Team"
     has_many :post_actors, :as => :post_actor
     has_many :posts, ->{order "created_at DESC"}
-    has_many :idea_links
+    has_many :idea_links, ->{where "idea_links.link_type <> 0"}
     has_many :idea_linked, class_name: "IdeaLink", foreign_key: "idea_linked_id"
-
+    has_many :milestones, ->{order "created_at DESC"}
+    has_many :idea_surveys
+    has_many :surveys, through: :idea_surveys
+    
+    #Socialization
     acts_as_followable
     acts_as_likeable
     acts_as_mentionable
@@ -31,6 +37,12 @@ class Idea < ActiveRecord::Base
     
     def self.watched_ideas(user)
         user.followees(Idea)
+    end
+    
+    def active_survey
+        survey = self.surveys.where(finished: false).order("survey_surveys.created_at DESC").first
+        logger.debug survey.inspect.light_yellow
+        return survey
     end
     
     def link_value(idea_id, user_id)
@@ -58,12 +70,34 @@ class Idea < ActiveRecord::Base
     def my_idea_teams(user_id)
         self.teams & User.find(user_id).teams
     end
-
+    
     def self.my_ideas_all(user_id)
         team_ideas = Idea.joins(teams: :users).where(users: {id: user_id}).distinct
         my_ideas = Idea.where(user_id: user_id)
         my_ideas_all = team_ideas | my_ideas
         return my_ideas_all
+    end
+    
+    #Default team is role = 0
+    def default_team
+        default_idea_team = self.idea_teams.where("idea_teams.role_id = 0").first
+        default_idea_team.team
+    end
+    
+    def default_team_members
+        default_team.users if default_team
+    end
+    
+    def default_team_opens
+        default_team.roles if default_team
+    end
+
+    def user_role(user_id)
+        UserTeam.where(team_id: default_team.id).where(user_id: user_id).first.role_id
+    end
+    
+    def user_role_desc(user_id)
+        UserTeamRole.role_desc(user_role(user_id))
     end
     
     #All ideas belongs to user teams, ordered by watchers
@@ -77,9 +111,14 @@ class Idea < ActiveRecord::Base
         return ideas
     end
     
+    def closed_surveys
+        self.surveys.where(finished: true).order("created_at DESC")
+    end
+    
     private
     
     def self.sort_by_watchers(ideas)
         ideas.sort { |a,b| b.likers(User).count <=> a.likers(User).count }
     end
 end
+
